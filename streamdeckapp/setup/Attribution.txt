@@ -1,0 +1,82 @@
+List of assets and their associated licenses:
+
+
+- Sick.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/sick"
+	title:			sick icons
+
+ medicine.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/medicine"
+	title:			medicine icons
+
+	
+ park.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/park"
+	title:			park icons
+
+ doctor.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/doctor"
+	title:			doctor icons
+
+ I-love-you.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/I-love-you"
+	title:			I-love-you icons
+
+ toilet.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/toilet"
+	title:			toilet icons
+
+ yes.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/yes"
+	title:			yes icons
+
+ no.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/no"
+	title:			no icons
+
+ hot.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/hot"
+	title:			hot icons
+
+ cold.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/cold"
+	title:			cold icons
+
+ food.png
+
+	Created by: 	Vectors Market - Flaticon
+	License:		Public domain
+	URL:			https://www.flaticon.com/free-icons/food"
+	title:			food icons
+
+ 

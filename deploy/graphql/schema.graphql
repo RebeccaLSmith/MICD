@@ -1,0 +1,219 @@
+type MessageInformation {
+  id: String!
+  Message: String!
+  Timestamp: AWSDateTime!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelMessageInformationConnection {
+  items: [MessageInformation]!
+  nextToken: String
+}
+
+input ModelMessageInformationFilterInput {
+  id: ModelStringInput
+  Message: ModelStringInput
+  Timestamp: ModelStringInput
+  and: [ModelMessageInformationFilterInput]
+  or: [ModelMessageInformationFilterInput]
+  not: ModelMessageInformationFilterInput
+}
+
+type Query {
+  getMessageInformation(id: String!): MessageInformation
+  listMessageInformations(filter: ModelMessageInformationFilterInput, limit: Int, nextToken: String): ModelMessageInformationConnection
+}
+
+input ModelMessageInformationConditionInput {
+  Message: ModelStringInput
+  Timestamp: ModelStringInput
+  and: [ModelMessageInformationConditionInput]
+  or: [ModelMessageInformationConditionInput]
+  not: ModelMessageInformationConditionInput
+}
+
+input CreateMessageInformationInput {
+  id: String
+  Message: String!
+  Timestamp: AWSDateTime!
+}
+
+input UpdateMessageInformationInput {
+  id: String!
+  Message: String
+  Timestamp: AWSDateTime
+}
+
+input DeleteMessageInformationInput {
+  id: String!
+}
+
+type Mutation {
+  createMessageInformation(input: CreateMessageInformationInput!, condition: ModelMessageInformationConditionInput): MessageInformation
+  updateMessageInformation(input: UpdateMessageInformationInput!, condition: ModelMessageInformationConditionInput): MessageInformation
+  deleteMessageInformation(input: DeleteMessageInformationInput!, condition: ModelMessageInformationConditionInput): MessageInformation
+}
+
+input ModelSubscriptionMessageInformationFilterInput {
+  id: ModelSubscriptionStringInput
+  DeviceName_SerialNumber: ModelSubscriptionStringInput
+  Message: ModelSubscriptionStringInput
+  Timestamp: ModelSubscriptionStringInput
+  and: [ModelSubscriptionMessageInformationFilterInput]
+  or: [ModelSubscriptionMessageInformationFilterInput]
+}
+
+type Subscription {
+  onCreateMessageInformation(filter: ModelSubscriptionMessageInformationFilterInput): MessageInformation @aws_subscribe(mutations: ["createMessageInformation"])
+  onUpdateMessageInformation(filter: ModelSubscriptionMessageInformationFilterInput): MessageInformation @aws_subscribe(mutations: ["updateMessageInformation"])
+  onDeleteMessageInformation(filter: ModelSubscriptionMessageInformationFilterInput): MessageInformation @aws_subscribe(mutations: ["deleteMessageInformation"])
+}

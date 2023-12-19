@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+import boto3
+import AWSIoTMQTTClient
+import uuid
+import streamdeckapp.src.config as config
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+class IoTManager:
+
+    def __init__(self, device_type, user_name, serial_number, region_name='us-west-2'):
+        
+        self.device_type = device_type
+        self.user_name = user_name
+        self.serial_number = serial_number
+        self.client = boto3.client('iot', region_name=region_name)
+
+    def get_iot_endpoint(self):
+        try:
+            response = self.client.describe_endpoint(endpointType='iot:Data-ATS')
+            return response['endpointAddress']
+        except ClientError as e:
+            logging.error(f"Error getting IoT endpoint: {e}")
+            print(f"Error fetching IoT EndPoint: {e}")
+        
+    @staticmethod
+    def construct_policy_name(device_type, user_name):
+        # Create the policy name based on the device type, serial number and provided user name.
+        return f"MICD/{device_type}/{user_name}/Policy"
+
+    @staticmethod
+    def construct_topic(device_type, user_name):
+        # Create the MQTT topic based on the device type, serial number and provided user name.
+        return f"MICD/{device_type}/{user_name}/Data"
+
+
+    def generate_thing_name(self):
+        return f"MICD{self.user_name}{uuid.uuid4()}"
+
+    def register_and_fetch_certs(self, policy_name='MICD_Policy'):
+        try:
+            # Register the device with AWS IoT Core
+            logging.info('Attempting to register device with AWS IoT...')
+            self.connect_to_aws_iot()
+            logging.info('Successfully registered device with AWS IoT.')
+            
+            # Create a new thing and attach the policy to it
+            logging.info('Attempting to create new thing and attach policy...')
+            policy_name = self.construct_policy_name(self.device_type, self.user_name)
+            self.client.create_policy(policyName=policy_name, policyDocument=config.POLICY_DOCUMENT)
+            
+            
+            thing_name = self.generate_thing_name()
+            self.client.create_thing(thingName=thing_name)
+            self.client.attach_policy(policyName=policy_name, target=thing_name)
+        
+            cert_response = self.client.create_keys_and_certificate(setAsActive=True)
+
+            # Save and return the paths of the certificates
+            cert_path = 'streamdeckapp/.aws/certs/certificate.pem.crt'
+            private_key_path = 'streamdeckapp/.aws/certs/private.pem.key'
+            root_ca_path = 'streamdeckapp/.aws/certs/root-CA.crt'
+            logging.info('Successfully fetched certificates.')
+            
+            with open(cert_path, 'w') as cert_file:
+                cert_file.write(cert_response['certificatePem'])
+            with open(private_key_path, 'w') as private_key_file:
+                private_key_file.write(cert_response['keyPair']['PrivateKey'])
+            with open(root_ca_path, 'w') as root_ca_file:
+                root_ca_file.write(cert_response['certificatePem'])
+            
+            return cert_path, private_key_path, root_ca_path
+        except Exception as e:
+            logging.error(f"Error during registering and fetching certs: {e}")
+        raise
+
+    def connect_to_aws_iot(self):
+        try:
+            # Connect to AWS IoT Core
+            logging.info('Attempting to connect to AWS IoT...')
+            myMQTTClient = AWSIoTMQTTClient(config.CLIENT_ID)
+            myMQTTClient.configureEndpoint(config.HOST, 8883)
+            myMQTTClient.configureCredentials(config.ROOT_CA, config.PRIVATE_KEY, config.CERTIFICATE)
+            myMQTTClient.connect()
+            logging.info('Successfully connected to AWS IoT.')
+
+        except AWSIoTMQTTClient.connectTimeoutException as e:
+            logging.error(f"Connect timeout: {e}")
+            raise
+
+        except AWSIoTMQTTClient.MQTTException as e:
+            logging.error(f"Error during connection to AWS IoT: {e}")
+            raise
+
+        except Exception as e:
+            logging.error(f"Unexpected error during connection to AWS IoT: {e}")
+            raise
+
+
+    iot_manager = IoTManager("SomeDeviceType", "SomeUsername")
+    iot_manager.connect_to_aws_iot()
+
+
+# Connect to AWS IoT Core
+logging.info('Attempting to connect to AWS IoT...')
+myMQTTClient = AWSIoTMQTTClient(config.AWS_IOT_CLIENT_ID)
+myMQTTClient.configureEndpoint(config.AWS_IOT_HOST, 8883)
+myMQTTClient.configureCredentials(config.AWS_IOT_ROOT_CA, config.AWS_IOT_PRIVATE_KEY, config.AWS_IOT_CERTIFICATE)
+
+# Attempt to connect and subscribe
+try:
+    myMQTTClient.connect()
+    logging.info('Successfully connected to AWS IoT.')
+except Exception as e:
+    logging.error(f'Failed to connect to AWS IoT: {e}')

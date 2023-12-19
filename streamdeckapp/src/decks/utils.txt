@@ -1,0 +1,70 @@
+from streamdeckapp.src.decks.DeviceManager import DeviceManager
+from streamdeckapp.src.config import BUTTON_MESSAGES
+import logging
+
+def connect_and_get_serial():
+    #Initializes the StreamDeck and returns its serial number.
+    try:
+        decks = DeviceManager().enumerate()
+        if not decks:
+            logging.error('No StreamDeck devices found!')
+            return None
+
+        stream_deck = decks[0]
+        stream_deck.open()
+        
+        # Return Serial Number
+        return stream_deck.get_serial_number()
+    except Exception as e:
+        logging.error(f"Failed to open connection to StreamDeck: {e}")
+        return None
+    
+# Adds StreamDeck Users Name to a file
+# TODO Add file path of where name should be added
+
+def add_name_to_file(name, file_path):
+    """
+    Append a user's name to the specified file.
+    
+    Parameters:
+    - name (str): Name of the user.
+    - file_path (str): Path to the target file.
+    
+    Returns:
+    - None
+    """
+    try:
+        with open(file_path, 'a') as file:
+            file.write(name + '\n')
+        print(f"Name '{name}' has been added to {file_path}.")
+    except Exception as e:
+        print(f"An error occurred: {e}")    
+        
+# Gets StreamDeck Messages from assigned buttons/streamdeck
+def get_streamdeck_messages():
+    """
+    Enumerate the devices and get KEY_COUNT for the first detected device.
+    Returns a set of messages based on the key count.
+    """
+    try:
+        device_manager = DeviceManager()
+        devices = device_manager.enumerate()
+        
+        if not devices:
+            raise ValueError('No StreamDeck devices found!')
+
+        key_count = devices[0].KEY_COUNT
+
+        return BUTTON_MESSAGES(key_count, {})
+
+    except Exception as e:
+        print(f"Error while detecting device: {e}")
+        return {}
+
+if __name__ == "__main__":
+    messages = get_streamdeck_messages()
+    
+    if messages:
+        for key, message in messages.items():
+            print(f"Button {key}: {message}")
+    

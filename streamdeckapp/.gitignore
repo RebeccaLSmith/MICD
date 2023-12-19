@@ -1,0 +1,21 @@
+.vscode
+.vscode/*
+.DS_Store
+.DS_Store/*
+*/__pycache__
+__pycache__/
+.__pycache__
+# AWS credentials
+.aws/certs
+.aws
+.key
+.crt 
+.aws/credentials
+
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
