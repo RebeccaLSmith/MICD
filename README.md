@@ -6,10 +6,13 @@ A Multi-Impairment Communication Device
 
 The MICD device eases communication for people who have difficulty communicating using messages sent from a Stream Deck user to a mobile phone and web application.
 
-I originally created this using a basic 3D printed button box for my dad. 
+I originally created this using a basic 3D printed button box for my dad pictured below. 
 
 ![MICD Button Box](Resources/Architecture/MICD_button_box.png)
 
+v2 has been upgraded the the Stream Deck:
+
+![Stream Deck](Resources/Architecture/streamdeck.png)
 
 ### *Core Contributors:*
 * [Rebecca Smith](https://www.linkedin.com/in/rebecca-smith101/) Project Lead Python Stream Deck application and IoT Connection
