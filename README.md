@@ -12,7 +12,7 @@ I originally created this using a basic 3D printed button box for my dad picture
 
 v2 has been upgraded the the Stream Deck:
 
-![Stream Deck](Resources/Instructions/streamdeck.png)
+![Stream Deck](Resources/instructions/streamdeck.png)
 
 ### *Core Contributors:*
 * [Rebecca Smith](https://www.linkedin.com/in/rebecca-smith101/) Project Lead Python Stream Deck application and IoT Connection
