@@ -1,4 +1,3 @@
-
 #### *Dedicated to my dad, Michael Otto Fredenburg, USMC 1948-2022*
 
 # The MICD Device  
