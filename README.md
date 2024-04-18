@@ -1,5 +1,7 @@
 #### *Dedicated to my dad, Michael Otto Fredenburg, USMC 1948-2022*
 
+Presented at AWS re:Invent Builders Fair 2023.
+
 # The MICD Device  
 A Multi-Impairment Communication Device
 
