@@ -1,17 +1,27 @@
-#### *Dedicated to my dad, Michael Otto Fredenburg, USMC 1948-2022*
+#### Dedicated to my dad, Michael Otto Fredenburg, USMC 1948-2022
 
 Presented at AWS re:Invent Builders Fair 2023.
 
-# The MICD Device  
+# The MICD Device
+
 A Multi-Impairment Communication Device
 
 The MICD device eases communication for people who have difficulty communicating using messages sent from a Stream Deck user to a mobile phone and web application.
 
-I originally created this using a basic 3D printed button box for my dad pictured below. 
+I originally created this using a basic 3D printed button box (pictured below) for my dad, Michael, who faced multiple communication difficulties caused by Agent Orange while serving in Vietnam.
+
+To communicate with my mom, his caretaker Teresa, a button was pressed and a buzzer sounded. As I visited my parents one day, it broke my heart to see my mom run up the stairs, fearing the worst, every time the buzzer on her hip would sound.
+
+Michael was blind in his left eye with limited vision on the right, deaf in his left ear with limited hearing on the right. Michael was also paralyzed on the left side of his face, including his vocal cords. Swallowing was very difficult, causing him to choke often.
+
+I searched for a better solution; at the time, there wasn’t one. After gathering the needs of my parents, I created the MICD device to enable Michael to send messages to Teresa’s phone at the touch of a button! He was able to see the brightly colored buttons; keeping it simple made it easy for him to use, especially since Michael really needed to communicate his basic life needs.
+
+Teresa was able to garden in her backyard, keeping her phone handy to read messages as they came in: “I’m Hungry”, “I’m Thirsty”, and “I Love You” were some of the messages he was able to send before he passed away on June 29, 2022.
+
 
 ![MICD Button Box](Resources/Architecture/MICD_button_box.png)
 
-v2 has been upgraded the the Stream Deck:
+v2 has been upgraded to the StreamDeck:
 
 ![Stream Deck](Resources/instructions/streamdeck.png)
 
@@ -21,7 +31,7 @@ v2 has been upgraded the the Stream Deck:
 * [Kyle Jones](https://www.linkedin.com/in/kyle-t-jones/) Architecture, Documentation
 
 
-In this project you will be connecting a Raspberry Pi to an Elgato Stream Deck. The project is deployed in the AWS Cloud using the AWS Cloud Development Kit (AWS CDK). The Elgato Stream Deck is utilized to send messages to AWS IoT Core over MQTT using a Raspberry Pi, an AWS Amplify web application is deployed, data is stored in Amazon DynamoDB, and text message are sent to an end user via Amazon SNS.
+In this project, you will be connecting a Raspberry Pi to an Elgato Stream Deck. The project is deployed in the AWS Cloud using the AWS Cloud Development Kit (AWS CDK). The Elgato Stream Deck is utilized to send messages to AWS IoT Core over MQTT using a Raspberry Pi, an AWS Amplify web application is deployed, data is stored in Amazon DynamoDB, and text messages are sent to an end user via Amazon SNS.
 
 ### Architecture
 
@@ -31,7 +41,7 @@ In this project you will be connecting a Raspberry Pi to an Elgato Stream Deck. 
 * Raspberry Pi (tested on Raspberry Pi 4 and Raspberry Pi Zero W)
 * MicroSD card
 * Power supply for Raspberry Pi (Power cord or battery)
-* Elgato Stream Deck ( tested with Mini, Original, and Pedal)
+* Elgato Stream Deck (tested with Mini, Original, and Pedal)
 
 ### Software and Library requirements
 * Raspberry Pi Imager https://www.raspberrypi.com/software/
