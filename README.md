@@ -395,19 +395,27 @@ After delploying the CDK file below, you will need to make some rules in IoT Cor
 * 2. Substitute <> fields with your values and execute this command in the terminal/command line:
 
 ```sh
-ADMIN_EMAIL=<admin_email>
-ADMIN_GIVEN_NAME=<admin_given_name>
-ADMIN_FAMILY_NAME=<admin_family_name>
-PATIENT_EMAIL=<patient_email>
-PATIENT_GIVEN_NAME=<patient_given_name>
-PATIENT_FAMILY_NAME=<patient_family_name>
+export ADMIN_EMAIL="<your_admin_email@example.com>"
+export ADMIN_GIVEN_NAME="<admin_first_name>"
+export ADMIN_FAMILY_NAME="<admin_last_name>"
+
+export PATIENT_EMAIL="<your_patient_email@example.com>"
+export PATIENT_GIVEN_NAME="<patient_first_name>"
+export PATIENT_FAMILY_NAME="<patient_last_name>"
+
 
 ```
 * 3. Run the following command to deploy the cdk:
 
 
 ```sh
-cdk deploy --all --require-approval never -c admin_email=$ADMIN_EMAIL -c admin_given_name=$ADMIN_GIVEN_NAME -c admin_family_name=$ADMIN_FAMILY_NAME -c patient_email=$PATIENT_EMAIL -c patient_given_name=$PATIENT_GIVEN_NAME -c patient_family_name=$PATIENT_FAMILY_NAME
+npx cdk deploy --all --require-approval never \
+  -c admin_email=$ADMIN_EMAIL \
+  -c admin_given_name=$ADMIN_GIVEN_NAME \
+  -c admin_family_name=$ADMIN_FAMILY_NAME \
+  -c patient_email=$PATIENT_EMAIL \
+  -c patient_given_name=$PATIENT_GIVEN_NAME \
+  -c patient_family_name=$PATIENT_FAMILY_NAME
 
 ```
 * 4. From the cdk outputs copy AppStack.CognitoIdentityPoolId variable (it will have some randomly generated numbers at the end). Paste it in <> field and run the following command:
